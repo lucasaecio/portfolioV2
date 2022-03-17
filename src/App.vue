@@ -1,27 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <main :class="{ 'app-section': !hasDataLoaded }">
+    <MainPage v-if="hasDataLoaded"></MainPage>
+    <LoaderComponent v-else></LoaderComponent>
+  </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent } from "vue";
+import LoaderComponent from "./components/LoaderComponent.vue";
+import MainPage from "./views/MainPage.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    LoaderComponent,
+    MainPage,
+  },
+  data() {
+    return {
+      userData: {},
+      hasDataLoaded: false,
+    };
+  },
+  created() {
+    fetch("https://api.jsonbin.io/b/62241b4f06182767436e0ff4/2")
+      .then((T) => T.json())
+      .then((response) => {
+        this.userData = response;
+        this.hasDataLoaded = true;
+      });
+  },
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+:root {
+  --main-bg-color: #191920;
+  --color-purple: #e613f1;
+}
+
+.app-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
