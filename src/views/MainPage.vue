@@ -20,7 +20,57 @@
       />
     </section>
 
-    <section class="aboutme" id="aboutme">teste</section>
+    <section class="aboutme" id="aboutme">
+      <div class="aboutme__section">
+        <div class="aboutme__header">
+          <h1 class="aboutme__title">About Me</h1>
+        </div>
+        <div class="aboutme__main">
+          <img class="image" src="@/assets/img/profile.jpg" />
+
+          <div class="card">
+            <div class="card__text">
+              <p>
+                É um prazer em tê-lo por aqui, me chamo Lucas, sou Desenvolvedor
+                Fullstack, atualmente moro em Recife - Pernambuco. No meu tempo
+                livre, tenho alguns hobbies, amo viajar de moto e além disso
+                também amo música até mesmo toco alguns instrumentos musicais.
+              </p>
+            </div>
+            <div class="card__graphs">
+              <div class="graphs__item">
+                <span>Vue</span>
+                <ProgressBar width="100%" percent="75%" />
+              </div>
+              <div class="graphs__item">
+                <span>ReactJS</span>
+                <ProgressBar width="100%" percent="45%" />
+              </div>
+              <div class="graphs__item">
+                <span>CSS</span>
+                <ProgressBar width="100%" percent="80%" />
+              </div>
+              <div class="graphs__item">
+                <span>Typescript</span>
+                <ProgressBar width="100%" percent="40%" />
+              </div>
+              <div class="graphs__item">
+                <span>Javascript</span>
+                <ProgressBar width="100%" percent="80%" />
+              </div>
+              <div class="graphs__item">
+                <span>PHP</span>
+                <ProgressBar width="100%" percent="70%" />
+              </div>
+              <div class="graphs__item">
+                <span>Node</span>
+                <ProgressBar width="100%" percent="50%" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -28,13 +78,14 @@
 import { defineComponent } from "vue";
 import $ from "jquery";
 import ScrollDownButton from "@/components/ScrollDownButton.vue";
+import ProgressBar from "@/components/ProgressBar.vue";
 
 export default defineComponent({
   name: "MainPage",
   data() {
     return {};
   },
-  components: { ScrollDownButton },
+  components: { ScrollDownButton, ProgressBar },
   methods: {
     scrollTo(sectionID = "presentation") {
       let sectionData = $(`#${sectionID}`).offset() ?? { top: 0 };
@@ -112,10 +163,6 @@ export default defineComponent({
   animation-direction: alternate;
 }
 
-.aboutme {
-  height: 100vh;
-}
-
 /* ANIMATION */
 @keyframes presention_icon {
   0% {
@@ -146,5 +193,69 @@ export default defineComponent({
   100% {
     color: var(--color-purple);
   }
+}
+
+/* ABOUT ME */
+
+.aboutme {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aboutme__section {
+  max-width: 50%;
+  margin-top: 150px;
+}
+.aboutme__header {
+  margin-bottom: 60px;
+}
+.aboutme__title {
+  font-size: 2.5em;
+}
+.aboutme__main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.aboutme__main .image {
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 100% 37%;
+}
+
+.aboutme__main .card {
+  max-width: 73%;
+  background-color: #2f2f2f;
+  padding: 25px;
+  border-radius: 25px;
+
+  display: flex;
+}
+.aboutme__main .card__text {
+  flex: 2;
+  line-height: 23px;
+  max-width: 55%;
+  margin-right: 30px;
+  text-align: justify;
+}
+
+.aboutme__main .card__graphs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.aboutme__main .card__graphs .graphs__item {
+  margin-bottom: 12px;
+}
+
+.aboutme__main .card__graphs .graphs__item:last-child {
+  margin-bottom: 0px;
 }
 </style>
